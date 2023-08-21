@@ -35,9 +35,9 @@ if [[ ! -z "$HOSTNAME" && ! -z "$DOMAIN" ]]; then
     postconf -e relayhost=
     postconf -e proxy_interfaces=$HOSTNAME
     echo -e "‣ Setting map"
-    postconf -e transport_maps=hash:/etc/postfix/transport
+    postconf -e transport_maps=lmdb:/etc/postfix/transport
     echo -e "$DOMAIN relay:[$MAIN_SERVER]" > /etc/postfix/transport
-    postmap hash:/etc/postfix/transport
+    postmap lmdb:/etc/postfix/transport
 fi
 
 # Increase the allowed header size, the default (102400) is quite smallish
